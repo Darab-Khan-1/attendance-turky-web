@@ -26,7 +26,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/change/password', [RegistrationController::class, 'changePassword']);
     
     Route::get('/status', [AttendanceController::class, 'status']);
-    Route::post('/check/in', [AttendanceController::class, 'checkIn']);
-    Route::post('/check/out', [AttendanceController::class, 'checkOut']);
+    Route::get('/check/in', [AttendanceController::class, 'checkIn']);
+    Route::get('/check/out', [AttendanceController::class, 'checkOut']);
     
 });
