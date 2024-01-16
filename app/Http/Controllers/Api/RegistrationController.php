@@ -124,7 +124,7 @@ class RegistrationController extends Controller
             $employee = Employee::where('user_id', $request->user()->id)->first();
             $employee->name = $request->name;
             $employee->phone = $request->phone;
-            $employee->license_no = $request->license_no;
+            // $employee->license_no = $request->license_no;
             if ($request->has('avatar')) {
                 $base64image = preg_replace('#^data:image/[^;]+;base64,#', '', $request->input('avatar'));
 
