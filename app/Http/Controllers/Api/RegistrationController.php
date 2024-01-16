@@ -74,7 +74,7 @@ class RegistrationController extends Controller
                 $data = new stdClass();
                 $data->bearer_token = $user->createToken('EmployeeLoginAuth')->accessToken;
                 $data->unique_id = $employee->unique_id;
-                $data->approved = $employee->approved;
+                // $data->approved = $employee->approved;
                 $data->online = $employee->online;
                 return   $this->apiResponse->apiJsonResponse(200, "Login Success", $data, "");
             } else {

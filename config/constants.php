@@ -2,7 +2,7 @@
 
 return [
     'Constants' => [
-        'host' 	 => 'http://154.38.162.118:8082',
+        'host' 	 => 'http://84.247.131.73:8082',
         'adminEmail' 		 => 'admin',
 		'adminPassword'=> 'admin',
 		'jsonA'  => 'Accept: application/json',
