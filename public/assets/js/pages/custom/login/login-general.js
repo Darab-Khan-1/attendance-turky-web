@@ -61,7 +61,7 @@ var KTLogin = function() {
 						}
 					});
 					$.ajax({
-						url: "/login",
+						url: "{{ url('/login') }}",
 						data: data,
 						method: "POST",
 						beforeSend: function() {
