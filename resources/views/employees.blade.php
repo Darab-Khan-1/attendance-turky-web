@@ -144,7 +144,7 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addModalLabel">Register Driver</h5>
+                <h5 class="modal-title" id="addModalLabel">Register Employee</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i aria-hidden="true" class="ki ki-close"></i>
                 </button>
@@ -239,7 +239,7 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Driver</h5>
+                <h5 class="modal-title" id="editModalLabel">Edit Employee</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i aria-hidden="true" class="ki ki-close"></i>
                 </button>
@@ -337,13 +337,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Delete Driver</h5>
+                <h5 class="modal-title" id="deleteModalLabel">Delete Employee</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i aria-hidden="true" class="ki ki-close"></i>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Are you sure to delete this driver?</p>
+                <p>Are you sure to delete this employee?</p>
             </div>
             <div class="modal-footer">
                 <a id="deleteUrl" class="btn btn-primary font-weight-bold">Yes</a>
@@ -394,13 +394,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Approve Driver</h5>
+                <h5 class="modal-title" id="deleteModalLabel">Approve Employee</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i aria-hidden="true" class="ki ki-close"></i>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Are you sure to approve this driver?</p>
+                <p>Are you sure to approve this employee?</p>
             </div>
             <div class="modal-footer">
                 <a id="approveUrl" class="btn btn-primary font-weight-bold">Yes</a>
