@@ -62,9 +62,21 @@ class AttendanceController extends Controller
     public function status(Request $request)
     {
         try {
-            $employee = Employee::where('user_id', '=', $request->user()->id)->first();
+            $attendance = Attendance::where('user_id', '=', $request->user()->id)->latest()->first();
             $data = new stdClass();
-            $data->online = $employee->online;
+            if($attendance == null){
+                $data->online = 0;
+                $data->check_in = '';
+                $data->check_out = '';
+            }elseif($attendance->check_out == null){
+                $data->online = 1;
+                $data->check_in = $attendance->check_in;
+                $data->check_out = '';
+            }else{
+                $data->online = 0;
+                $data->check_in = $attendance->check_in;
+                $data->check_out = $attendance->check_out;
+            }
             return $this->apiResponse->apiJsonResponse(200, "Success", $data, "");
         } catch (\Throwable $e) {
             return $this->apiResponse->apiJsonResponse(400, "Something went wrong", '', $e->getMessage());
