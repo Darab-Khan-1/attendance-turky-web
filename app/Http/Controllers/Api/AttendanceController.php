@@ -59,20 +59,38 @@ class AttendanceController extends Controller
             return $this->apiResponse->apiJsonResponse(400, "Something went wrong", '', $e->getMessage());
         }
     }
+    public function all(Request $request)
+    {
+        try {
+            $attendance = Attendance::where('user_id', '=', $request->user()->id)->whereNotNull('check_out')->get();
+            $response = [];
+            foreach($attendance as $value){
+                $data = new stdClass();
+                $data->check_in = $value->check_in;
+                $data->check_out = $value->check_out;
+                $data->hours = $value->hours;
+                $data->created_at = $value->created_at;
+                array_push($response,$data);
+            }
+            return $this->apiResponse->apiJsonResponse(200, "Success", $response, "");
+        } catch (\Throwable $e) {
+            return $this->apiResponse->apiJsonResponse(400, "Something went wrong", '', $e->getMessage());
+        }
+    }
     public function status(Request $request)
     {
         try {
             $attendance = Attendance::where('user_id', '=', $request->user()->id)->latest()->first();
             $data = new stdClass();
-            if($attendance == null){
+            if ($attendance == null) {
                 $data->online = 0;
                 $data->check_in = '';
                 $data->check_out = '';
-            }elseif($attendance->check_out == null){
+            } elseif ($attendance->check_out == null) {
                 $data->online = 1;
                 $data->check_in = $attendance->check_in;
                 $data->check_out = '';
-            }else{
+            } else {
                 $data->online = 0;
                 $data->check_in = $attendance->check_in;
                 $data->check_out = $attendance->check_out;
