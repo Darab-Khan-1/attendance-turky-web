@@ -163,7 +163,7 @@ class RegistrationController extends Controller
         try {
             $user = User::find($request->user()->id);
             if (!Hash::check($request->old_password, $user->password)) {
-                return  $this->apiResponse->apiJsonResponse(401, "Invalid Request", '', "Old password is not correct");
+                return  $this->apiResponse->apiJsonResponse(400, "Invalid Request", '', "Old password is not correct");
             }
             $user->password = Hash::make($request->new_password);
             $user->save();
