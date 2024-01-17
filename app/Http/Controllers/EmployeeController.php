@@ -13,9 +13,10 @@ use Intervention\Image\Facades\Image;
 use App\Helpers\Timezone;
 use PDO;
 use stdClass;
+
 class EmployeeController extends Controller
 {
-   
+
     protected $DeviceService;
     public function __construct(DeviceService $DeviceService)
     {
@@ -150,6 +151,7 @@ class EmployeeController extends Controller
         $user = User::find($request->user_id);
         $user->password = Hash::make($request->password);
         $user->save();
+        $user->tokens()->delete();
         return redirect('employees')->with('success', 'Password changed');
     }
     public function delete($id)
@@ -163,5 +165,4 @@ class EmployeeController extends Controller
         $user->delete();
         return redirect('employees')->with('success', 'Employee deleted successfully');
     }
-
 }
