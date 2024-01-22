@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\AttendanceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,4 +34,9 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('delete/employee/{id}', [EmployeeController::class, 'delete']);
     Route::get('approve/employee/{id}', [EmployeeController::class, 'approve']);
     Route::post('change/password', [EmployeeController::class, 'changePassword']);
+    // Attendance
+    Route::get('all/attendance', [AttendanceController::class, 'index']);
+    Route::get('live/location/{device_id}/{user_id}', [EmployeeController::class, 'live']);
+    Route::get('playback/index/{service_id}/{user_id}', [EmployeeController::class, 'playbackIndex']);
+    Route::get('playback/history/{id}/{from}/{to}', [EmployeeController::class, 'playback']);
 });

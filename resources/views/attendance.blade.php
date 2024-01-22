@@ -38,11 +38,11 @@
                                                     fill="#000000" />
                                             </g>
                                         </svg><!--end::Svg Icon--></span>
-                                    <div class="text-dark font-weight-bolder font-size-h2 mt-3">{{ $total }}
+                                    {{-- <div class="text-dark font-weight-bolder font-size-h2 mt-3">{{ $total }} --}}
                                     </div>
                                     <a href="#"
                                         class="text-muted text-hover-primary font-weight-bold font-size-lg mt-1">Total
-                                        Trips</a>
+                                        Attendance</a>
                                 </div>
                             </div>
                             <!--end::Tiles Widget 12-->
@@ -50,17 +50,10 @@
                     </div>
                 </div>
             </div>
-            <div class="card card-custom mt-5" style="box-shadow: inset 1px 1px 10px 1px #c9c9c9;">
+            {{-- <div class="card card-custom mt-5" style="box-shadow: inset 1px 1px 10px 1px #c9c9c9;">
                 <div class="card-body p-5">
                     <div class="row px-5">
-                        {{-- <div class="col-xl-4" style="margin-bottom: -25px;">
-                            <!--begin::Tiles Widget 12-->
-
-                            <!--end::Tiles Widget 12-->
-                        </div> --}}
-
-                        <input type="hidden" value="{{ isset($service->id) ? $service->driver->device_id : '' }}"
-                            id="device_id">
+                        
 
                         <label for="" style="margin-top: 12px;">From</label>
                         <input type="date" class="col-md-5 m-1 form-control" id="from"
@@ -76,7 +69,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="card card-custom my-5">
                 @if (session('success'))
                     <div class="alert alert-success m-2">
@@ -96,7 +89,7 @@
                 @endif
                 <div class="card-header flex-wrap border-0 pt-6 pb-0">
                     <div class="card-title">
-                        <h3 class="card-label">Trips
+                        <h3 class="card-label">Attendance
                             {{-- <span class="d-block text-muted pt-2 font-size-sm">Companies made easy</span> --}}
                         </h3>
                     </div>
@@ -153,83 +146,58 @@
             serverSide: false,
 
             ajax: {
-                url: "{{ url('all/trips') }}" + "/" + $("#from").val() + "/" + $("#to").val()
+                url: "{{ url('all/attendance') }}"
             },
 
             columns: [{
-                    data: 'driver',
-                    title: 'Driver',
+                    data: 'emp_name',
+                    title: 'Employee Name',
                     render: function(data, type, row) {
-                        let html = ''
-                        html += '<span class="font-weight-bold">Name: </span>' + data.name
-                        html += '<br><span class="font-weight-bold">Phone: </span>' + data.phone
-                        return html
+                        return data;
                     }
-                }, {
-                    data: 'service_in',
-                    title: 'Started At',
+                },{
+                    data: 'emp_email',
+                    title: 'Email',
                     render: function(data, type, row) {
-                        let html = ''
-                        html += '<span class="font-weight-bold">Time: </span>' + data
-                        if (row.in_address != null)
-                            html += '<br><span class="font-weight-bold">Address: </span>' + row
-                            .in_address
-                        return html
-
+                        return data;
                     }
-                }, {
-                    data: 'service_out',
-                    title: 'Competed At',
+                },{
+                    data: 'check_in',
+                    title: 'Check In',
                     render: function(data, type, row) {
-                        let html = ''
-                        html += '<span class="font-weight-bold">Time: </span>' + data
-                        if (row.out_address != null)
-                            html += '<br><span class="font-weight-bold">Address: </span>' + row
-                            .out_address
-                        return html
-                    }
-                }, {
-                    data: 'id',
-                    title: 'Status',
-                    render: function(data, type, row) {
-                        let html = ''
-                        if (row.service_out != null) {
-                            html =
-                                '<span class="font-weight-bold badge badge-success">COMPLETED</span>'
-                        } else if (row.driver.online == 1 && row.service_out == null) {
-                            html =
-                                '<span class="font-weight-bold badge text-white" style="background:lime">Online</span>'
-                        }
-                        if (row.driver.online == 0 && row.service_out == null) {
-                            html =
-                                '<span class="font-weight-bold badge text-white" style="background:red">Offline</span>'
-                        }
-                        return html
+                        return data;
                     }
                 },
                 {
-                    data: "user_id",
-                    title: "Action",
-                    width: 150,
+                    data: 'check_out',
+                    title: 'Check Out',
+                    render: function(data, type, row) {
+                        return data;
+                    }
+                },
+                {
+                    data: 'check_out',
+                    title: 'Playback',
                     render: function(data, type, row) {
                         let html = ''
-                        if (row.service_out != null) {
-                            let url = "{{ url('playback/index') }}" + "/" + row.id
-                            html += '<a href="' + url +
-                                '" class="btn btn-sm btn-clean btn-icon mr-2" title="Playback"><span class="svg-icon svg-icon-md"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" opacity="0.3" cx="12" cy="12" r="9"/><path d="M11.1582329,15.8732969 L15.1507272,12.3908445 C15.3588289,12.2093278 15.3803803,11.8934798 15.1988637,11.6853781 C15.1842721,11.6686494 15.1685826,11.652911 15.1518994,11.6382673 L11.1594051,8.13385466 C10.9518699,7.95169059 10.6359562,7.97225796 10.4537922,8.17979317 C10.3737213,8.27101604 10.3295679,8.388251 10.3295679,8.5096304 L10.3295679,15.4964955 C10.3295679,15.7726378 10.5534255,15.9964955 10.8295679,15.9964955 C10.950411,15.9964955 11.0671652,15.9527307 11.1582329,15.8732969 Z" fill="#000000"/></g></svg><!--end::Svg Icon--></span></span></a>'
-                        }
+                    html += '<div class="row">'
+                    html += `<a title="Playback History" href="` + "{{ url('playback/index/') }}" + "/" + row.service_id+ "/" + row.emp_id + `"><span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Map\Marker1.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24"/>
+                                    <path d="M5,10.5 C5,6 8,3 12.5,3 C17,3 20,6.75 20,10.5 C20,12.8325623 17.8236613,16.03566 13.470984,20.1092932 C12.9154018,20.6292577 12.0585054,20.6508331 11.4774555,20.1594925 C7.15915182,16.5078313 5,13.2880005 5,10.5 Z M12.5,12 C13.8807119,12 15,10.8807119 15,9.5 C15,8.11928813 13.8807119,7 12.5,7 C11.1192881,7 10,8.11928813 10,9.5 C10,10.8807119 11.1192881,12 12.5,12 Z" fill="#000000" fill-rule="nonzero"/>
+                                </g>
+                            </svg><!--end::Svg Icon--></span></a>`
 
+                    html += '</div>'
                         return html;
                     }
-                }
+                },
+                
             ],
             "autoWidth": false,
             "ordering": false,
 
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
+          
             dom: 'Bfrtip',
             buttons: [{
                     extend: 'pdfHtml5',

@@ -324,7 +324,7 @@
 
 
                             </li>
-                            <li class="menu-item menu-item-submenu" id="trips_menu"><a href="{{ url('trips') }}"
+                            <li class="menu-item menu-item-submenu" id="trips_menu"><a href="{{ url('all/attendance') }}"
                                     class="menu-link">
                                     <span
                                         class="svg-icon menu-icon"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Layout\Layout-grid.svg--><svg
@@ -342,10 +342,10 @@
                                         </svg><!--end::Svg Icon--></span>
                                     <span class="menu-text">&nbsp;&nbsp;Attendance</span></a>
                             </li>
-                            <li class="menu-section">
+                            {{-- <li class="menu-section">
                                 <h4 class="menu-text ">TRACKING</h4>
                                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
-                            </li>
+                            </li> 
                             <li class="menu-item menu-item-submenu" id="live_menu"><a
                                     href="{{ url('live/location/0') }}" class="menu-link">
                                     <span
@@ -383,7 +383,7 @@
 
 
                                     <span class="menu-text">&nbsp;&nbsp;Playback</span></a>
-                            </li>
+                            </li>--}}
                         </ul>
                         <!--end::Menu Nav-->
                     </div>

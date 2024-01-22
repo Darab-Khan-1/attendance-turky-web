@@ -119,43 +119,8 @@
         <div class="card card-custom m-4">
             <div class="p-5">
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="card card-custom " style="height:80vh;box-shadow: inset 1px 1px 10px 1px #c9c9c9;">
-                            <div class="card-body py-2">
-                                <div class="row">
-                                    <div class="form-group col-md-12">
-                                        <h3 class="text-center py-2">Drivers</h3>
-                                        {{-- <button class="btn btn-primary w-100" onclick="showAll()">Show All</button> --}}
-                                        <input type="text" id="searchInput" class="form-control mb-2"
-                                            placeholder="Search by name or phone number" style="border:none">
-                                        <ul class="user-list">
-                                            @foreach ($drivers as $value)
-                                                <li id="{{ 'USER' . $value->device_id }}"
-                                                    class="user-item {{ isset($service->id) && $service->driver->device_id == $value->device_id ? 'active' : '' }}"
-                                                    data-name="{{ $value->name }}" device_id="{{ $value->device_id }}"
-                                                    data-phone="{{ $value->phone }}">
-                                                    <div class="user-profile">
-                                                        <span
-                                                            class="status-dot {{ $value->online === 1 ? 'online' : 'offline' }}"></span>
-                                                        <img src="{{ $value->avatar }}" alt="Profile Image"
-                                                            class="user-avatar">
-                                                    </div>
-                                                    <div class="user-details">
-                                                        <p class="user-name">{{ $value->name }}</p>
-                                                        <p class="user-number">{{ $value->phone }}</p>
-                                                    </div>
-                                                </li>
-                                            @endforeach
-
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-md-9">
+                    
+                    <div class="col-md-12">
                         <div class="card card-custom" style="box-shadow: inset 1px 1px 10px 1px #c9c9c9;">
                             <div class="card-body p-5">
                                 <div class="row px-5">
@@ -166,15 +131,15 @@
                                     </div> --}}
 
                                     <input type="hidden"
-                                        value="{{ isset($service->id) ? $service->driver->device_id : '' }}"
+                                        value="{{ isset($attendance->id) ? $attendance->employee->device_id : '' }}"
                                         id="device_id">
 
                                     <label for="" style="margin-top: 12px;">From</label>
                                     <input type="datetime-local" class="col-md-3 m-1 form-control" id="from"
-                                        value="{{ isset($service->id) ? date('Y-m-d H:i:s', strtotime($service->service_in)) : date('Y-m-d H:i:s', strtotime('-12 hours')) }}">
+                                        value="{{ isset($attendance->id) ? date('Y-m-d H:i:s', strtotime($attendance->check_in)) : date('Y-m-d H:i:s', strtotime('-12 hours')) }}">
                                     <label for="" style="margin-top: 12px;">To</label>
                                     <input type="datetime-local" class="col-md-3 m-1 form-control" id="to"
-                                        value="{{ isset($service->id) ? date('Y-m-d H:i:s', strtotime($service->service_out)) : date('Y-m-d H:i:s', strtotime('now')) }}">
+                                        value="{{ isset($attendance->id) ? date('Y-m-d H:i:s', strtotime($attendance->check_out)) : date('Y-m-d H:i:s', strtotime('now')) }}">
 
                                     <button class="m-1 btn btn-primary text-light" id="fetchAndPlayButton"
                                         style="width: 130px;" onclick="fetchPositionsAndPlay()">&nbsp;Search</button>

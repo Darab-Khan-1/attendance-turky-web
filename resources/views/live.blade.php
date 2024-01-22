@@ -119,43 +119,8 @@
         <div class="card card-custom m-4">
             <div class="p-5">
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="card card-custom " style="height:90vh;box-shadow: inset 1px 1px 10px 1px #c9c9c9;">
-                            <div class="card-body py-2">
-                                <div class="row">
-                                    <div class="form-group col-md-12">
-                                        <h3 class="text-center py-2">Drivers</h3>
-                                        <button class="btn btn-primary w-100" onclick="showAllLocations()">Show
-                                            All</button>
-                                        <input type="text" id="searchInput" class="form-control mb-2"
-                                            placeholder="Search by name or phone number" style="border:none">
-                                        <ul class="user-list">
-                                            @foreach ($drivers as $value)
-                                                <li id="{{ 'USER' . $value->device_id }}" class="user-item"
-                                                    data-name="{{ $value->name }}" device_id="{{ $value->device_id }}"
-                                                    data-phone="{{ $value->phone }}">
-                                                    <div class="user-profile">
-                                                        <span
-                                                            class="status-dot {{ $value->online === 1 ? 'online' : 'offline' }}"></span>
-                                                        <img src="{{ $value->avatar }}" alt="Profile Image"
-                                                            class="user-avatar">
-                                                    </div>
-                                                    <div class="user-details">
-                                                        <p class="user-name">{{ $value->name }}</p>
-                                                        <p class="user-number">{{ $value->phone }}</p>
-                                                    </div>
-                                                </li>
-                                            @endforeach
-
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-md-9">
+                    
+                    <div class="col-md-12">
                         <div class="card card-custom" id="infoCard" style="display:none;box-shadow: inset 1px 1px 10px 1px #c9c9c9;">
                             <div class="card-body p-5">
                                 <div class="row">
@@ -238,22 +203,6 @@
     $(document).ready(function() {
 
         initMap();
-        $("#searchInput").on("keyup", function() {
-            var searchText = $(this).val().toLowerCase();
-
-            $(".user-item").each(function() {
-                var userName = $(this).find(".user-name").text().toLowerCase();
-                var userNumber = $(this).find(".user-number").text().toLowerCase();
-
-                if (userName.indexOf(searchText) > -1 || userNumber.indexOf(searchText) > -1) {
-                    $(this).show();
-                } else {
-                    $(this).hide();
-                }
-            });
-        });
-
-
         var navDevice = {!! json_encode($id) !!}
         if (navDevice != null && navDevice != 0) {
             var element = $("#USER" + navDevice);
@@ -265,8 +214,8 @@
             document.getElementById("infoCard").style.display = 'block'
 
 
-            var name = element.attr('data-name')
-            var phone = element.attr('data-phone')
+            var name = "{{$employee->name}}";
+            var phone = "{{$employee->phone}}";
             // document.getElementById("time_info").innerHTML = '-'
             document.getElementById("position_info").innerHTML = '-'
             var timeInfoDiv = document.getElementById("driver_info");
