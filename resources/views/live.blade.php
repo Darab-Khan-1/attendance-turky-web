@@ -226,7 +226,7 @@
             table += "</table>";
 
             timeInfoDiv.innerHTML = table;
-            const selectedDriver = element.attr('device_id');
+            const selectedDriver = "{{$id}}";
             if (interval) {
                 clearInterval(interval);
                 refreshMap();
@@ -331,7 +331,7 @@
 
     function ajaxCall(driver) {
         $.ajax({
-            url: "{{ url('/live/location/') }}" + "/" + driver,
+            url: "{{ url('/live/location/') }}" + "/" + driver +"/"+{{$employee->id}},
             method: "GET",
             success: function(data) {
                 if (data && data.latitude && data.longitude) {

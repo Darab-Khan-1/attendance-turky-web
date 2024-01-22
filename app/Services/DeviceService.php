@@ -78,7 +78,6 @@ class DeviceService
 
     public function live($id)
     {
-
         $sessionId = Session('cookie');
         $position =  static::curl('/api/positions?deviceId=' . $id, 'GET', $sessionId, '', array('Content-Type: application/json', 'Accept: application/json'));
         return json_decode($position->response);
