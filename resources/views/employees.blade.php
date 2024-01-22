@@ -394,13 +394,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Approve Driver</h5>
+                <h5 class="modal-title" id="deleteModalLabel">Approve Employee</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i aria-hidden="true" class="ki ki-close"></i>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Are you sure to approve this driver?</p>
+                <p>Are you sure to approve this employee?</p>
             </div>
             <div class="modal-footer">
                 <a id="approveUrl" class="btn btn-primary font-weight-bold">Yes</a>

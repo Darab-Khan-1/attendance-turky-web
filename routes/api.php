@@ -24,8 +24,10 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/profile', [RegistrationController::class, 'profile']);
     Route::post('/update/profile', [RegistrationController::class, 'updateProfile']);
     Route::post('/change/password', [RegistrationController::class, 'changePassword']);
-
-    Route::post('/check/in', [AttendanceController::class, 'checkIn']);
-    Route::post('/check/out', [AttendanceController::class, 'checkOut']);
+    
+    Route::get('/all/attendance', [AttendanceController::class, 'all']);
+    Route::get('/status', [AttendanceController::class, 'status']);
+    Route::get('/check/in', [AttendanceController::class, 'checkIn']);
+    Route::get('/check/out', [AttendanceController::class, 'checkOut']);
     
 });

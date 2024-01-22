@@ -74,7 +74,7 @@ class RegistrationController extends Controller
                 $data = new stdClass();
                 $data->bearer_token = $user->createToken('EmployeeLoginAuth')->accessToken;
                 $data->unique_id = $employee->unique_id;
-                $data->approved = $employee->approved;
+                // $data->approved = $employee->approved;
                 $data->online = $employee->online;
                 return   $this->apiResponse->apiJsonResponse(200, "Login Success", $data, "");
             } else {
@@ -124,7 +124,7 @@ class RegistrationController extends Controller
             $employee = Employee::where('user_id', $request->user()->id)->first();
             $employee->name = $request->name;
             $employee->phone = $request->phone;
-            $employee->license_no = $request->license_no;
+            // $employee->license_no = $request->license_no;
             if ($request->has('avatar')) {
                 $base64image = preg_replace('#^data:image/[^;]+;base64,#', '', $request->input('avatar'));
 
@@ -163,7 +163,7 @@ class RegistrationController extends Controller
         try {
             $user = User::find($request->user()->id);
             if (!Hash::check($request->old_password, $user->password)) {
-                return  $this->apiResponse->apiJsonResponse(401, "Invalid Request", '', "Old password is not correct");
+                return  $this->apiResponse->apiJsonResponse(400, "Invalid Request", '', "Old password is not correct");
             }
             $user->password = Hash::make($request->new_password);
             $user->save();
