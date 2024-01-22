@@ -78,19 +78,12 @@ class DeviceService
 
     public function live($id)
     {
-
         $sessionId = Session('cookie');
         $position =  static::curl('/api/positions?deviceId=' . $id, 'GET', $sessionId, '', array('Content-Type: application/json', 'Accept: application/json'));
         return json_decode($position->response);
     }
     public function playback($id, $from, $to)
     {
-        // $isCDT = static::isCDT();
-        // if($isCDT){
-        //     $timeDifference = 5;
-        // }else{
-        //     $timeDifference = 6;
-        // }
         $to = new DateTime($to);
         $to->setTimezone(new DateTimeZone("UTC"));
         $from = new DateTime($from);
@@ -115,35 +108,15 @@ class DeviceService
 
         $data = 'deviceId=' . $id . '&from=' . $from . '&to=' . $to;
         $stops = static::curl('/api/reports/stops?' . $data, 'GET', $sessionId, '', array('Content-Type: application/json', 'Accept: application/json'));
-        // dd($data);
 
-        // dd($data);
-        // $data = json_decode($data->response);
-        // $duration = array();
         $latlongs = array();
         // $total_rec = count((array)$data);
         $index = 0;
-        // foreach ($data as $key => $trips) {
-        //     $stop_time = 0;
-        //     if ($total_rec - 1 > $key) {
-        //         $datetime1 = new DateTime($data[$key]->endTime);
-        //         $datetime2 = new DateTime($data[$key + 1]->startTime);
-        //         $interval = $datetime1->diff($datetime2);
-        //         $stop_time = $interval->format('%h hours %i minutes');
-        //     }
-        //     $datetime1 = new DateTime($trips->startTime);
-        //     $datetime2 = new DateTime($trips->endTime);
-        //     $interval = $datetime1->diff($datetime2);
-        //     $elapsed = $interval->format('Moving Time: %h hours %i minutes');
-        //     $from = date('Y-m-d\TH:i', strtotime($trips->startTime));
-        //     $from = $from . ":00Z";
-        //     $to = date('Y-m-d\TH:i', strtotime($trips->endTime));
-        //     $to = $to . ":00Z";
+        
         $routes = 'deviceId=' . $id . '&from=' . $from . '&to=' . $to;
         $routes = static::curl('/api/reports/route?' . $routes, 'GET', $sessionId, '', array('Content-Type: application/json', 'Accept: application/json'));
         $routes = json_decode($routes->response);
-        // print_r($routes);die();
-        // dd($routes);
+
         foreach ($routes as $i => $value) {
 
             $latlongs[$index]['trip_no'] = 0;

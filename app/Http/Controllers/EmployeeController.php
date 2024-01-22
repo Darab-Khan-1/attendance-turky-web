@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 use App\Services\DeviceService;
 use Intervention\Image\Facades\Image;
+use App\Models\Attendance;
 use App\Helpers\Timezone;
 use PDO;
 use stdClass;
@@ -165,4 +166,35 @@ class EmployeeController extends Controller
         $user->delete();
         return redirect('employees')->with('success', 'Employee deleted successfully');
     }
+    public function live(Request $request, $id = null,$user_id=null)
+    {
+        if ($request->ajax()) {
+           
+            $position = $this->DeviceService->live($id);
+            // dd($position);
+            if (isset($position[0])) {
+                $position[0]->serverTime = date('h:i A d M, Y', strtotime($position[0]->serverTime));
+                return $position[0];
+            }
+            return [];
+        }
+        $employee = Employee::where('user_id',$user_id)->first();
+        return view('live', compact('employee', 'id'));
+    }
+    public function playbackIndex($attendance_id,$user_id)
+    {
+        $attendance = null;
+        if ($attendance_id != 0) {
+            $attendance = Attendance::where('id', $attendance_id)->with('employee')->first();
+        }
+        $employee = Employee::where('user_id',$user_id)->first();
+        return view('playback', compact('employee', 'attendance'));
+    }
+
+    public function playback($id, $from, $to)
+    {
+        $response = $this->DeviceService->playback($id, $from, $to);
+        return $response;
+    }
+
 }
