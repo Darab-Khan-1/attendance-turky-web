@@ -181,14 +181,14 @@ class EmployeeController extends Controller
         $employee = Employee::where('user_id',$user_id)->first();
         return view('live', compact('employee', 'id'));
     }
-    public function playbackIndex($attendance_id,$user_id)
+    public function playbackIndex($attendance_id,$user_id,$from=null,$to=null)
     {
         $attendance = null;
         if ($attendance_id != 0) {
             $attendance = Attendance::where('id', $attendance_id)->with('employee')->first();
         }
         $employee = Employee::where('user_id',$user_id)->first();
-        return view('playback', compact('employee', 'attendance'));
+        return view('playback', compact('employee', 'attendance','from','to'));
     }
 
     public function playback($id, $from, $to)
