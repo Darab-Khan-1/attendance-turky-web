@@ -70,7 +70,7 @@
                     </div>
                 </div>
             </div> --}}
-            <div class="card card-custom my-5">
+            <div class="card card-custom my-5" style=" margin:16px ">
                 @if (session('success'))
                     <div class="alert alert-success m-2">
                         {{ session('success') }}
@@ -128,7 +128,7 @@
     </div>
     <!--end::Entry-->
 </div>
-
+</div>
 <!--end::Content-->
 @include('includes/footer')
 
@@ -172,6 +172,11 @@
                     data: 'check_out',
                     title: 'Check Out',
                     render: function(data, type, row) {
+                        if(data=="" || data==null){
+                            var d = new Date();
+                            var time =d.getFullYear()+"-"+(d.getMonth() + 1)+"-"+d.getDate()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds() ;
+                            return time;
+                        }
                         return data;
                     }
                 },
@@ -181,7 +186,13 @@
                     render: function(data, type, row) {
                         let html = ''
                     html += '<div class="row">'
-                    html += `<a title="Playback History" href="` + "{{ url('playback/index/') }}" + "/" + row.service_id+ "/" + row.emp_id + `"><span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Map\Marker1.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    html += `<a title="Playback History" href="` + "{{ url('playback/index/') }}" + "/" + row.service_id+ "/" + row.emp_id + `"><span class="svg-icon svg-icon-primary svg-icon-2x"><span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Media/Play.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="0" y="0" width="24" height="24"/>
+                                <path d="M9.82866499,18.2771971 L16.5693679,12.3976203 C16.7774696,12.2161036 16.7990211,11.9002555 16.6175044,11.6921539 C16.6029128,11.6754252 16.5872233,11.6596867 16.5705402,11.6450431 L9.82983723,5.72838979 C9.62230202,5.54622572 9.30638833,5.56679309 9.12422426,5.7743283 C9.04415337,5.86555116 9,5.98278612 9,6.10416552 L9,17.9003957 C9,18.1765381 9.22385763,18.4003957 9.5,18.4003957 C9.62084305,18.4003957 9.73759731,18.3566309 9.82866499,18.2771971 Z" fill="#000000"/>
+                            </g>
+                        </svg><!--end::Svg Icon--></span><!--end::Svg Icon--></span></a>`
+                    html += `<a href="` + "{{ url('live/location') }}" + "/" + row.device_id+ "/" + row.emp_id + `"><span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Map\Marker1.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <rect x="0" y="0" width="24" height="24"/>
                                     <path d="M5,10.5 C5,6 8,3 12.5,3 C17,3 20,6.75 20,10.5 C20,12.8325623 17.8236613,16.03566 13.470984,20.1092932 C12.9154018,20.6292577 12.0585054,20.6508331 11.4774555,20.1594925 C7.15915182,16.5078313 5,13.2880005 5,10.5 Z M12.5,12 C13.8807119,12 15,10.8807119 15,9.5 C15,8.11928813 13.8807119,7 12.5,7 C11.1192881,7 10,8.11928813 10,9.5 C10,10.8807119 11.1192881,12 12.5,12 Z" fill="#000000" fill-rule="nonzero"/>

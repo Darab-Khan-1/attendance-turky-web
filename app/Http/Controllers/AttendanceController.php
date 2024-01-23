@@ -49,10 +49,12 @@ class AttendanceController extends Controller
         ->orderBy('attendances.created_at','DESC')->get();
         $summarizedData = [];
         $total_hours=0;
+        $total_absents=0;
         $currentDate = $from;
         while ($currentDate <= $to) {
             $selectedDates[] = $currentDate;
             $currentDate = date('Y-m-d', strtotime($currentDate . ' +1 day'));
+            $total_absents++;
         }
         
        // dd($summarizedData);
@@ -65,20 +67,22 @@ class AttendanceController extends Controller
                     'hours' => 0,
                     'minutes' => 0,
                     'check_in'=>$value.'- absent',
+                    'check_out'=>$value.'- absent',
                     'emp_name' =>$record->emp_name ,
                     'emp_email' => $record->emp_email,
                     'emp_id'=>$record->emp_id,
                     
                 ];
                 }
+                
             }
             if($summarizedData[$date]['date']===$date){
-                
                 $summarizedData[$date] = [
                     'date' => $value,
                     'hours' => 0,
                     'minutes' => 0,
                     'check_in'=>$record->check_in,
+                    'check_out'=>$record->check_out,
                     'emp_name' =>$record->emp_name ,
                     'emp_email' => $record->emp_email,
                     'emp_id'=>$record->emp_id,
@@ -94,22 +98,18 @@ class AttendanceController extends Controller
                         $summarizedData[$date]['hours'] += $extraHours;
                         $summarizedData[$date]['minutes'] %= 60;
                     }
-                $total_hours+= $summarizedData[$date]['hours'];
+                    $total_hours+= $summarizedData[$date]['hours'];
                 }
-                
-            
-             
-               
+                $summarizedData[$date]['check_out']=$record->check_out;
+                $total_absents--;
             }
-                    
-            
-        
+               
         }
             
        // dd($summarizedData);
         $data['data']=DataTables::of($summarizedData)->make(true);
         $data['total_work_hours']=$total_hours;
-        $data['total_absents']=0;
+        $data['total_absents']=$total_absents;
         return $data;
     }
     /**
