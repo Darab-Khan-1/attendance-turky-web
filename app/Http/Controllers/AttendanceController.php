@@ -63,6 +63,7 @@ class AttendanceController extends Controller
             foreach ($selectedDates as $value) {
                 if (!isset($summarizedData[$value])) {
                 $summarizedData[$value] = [
+                    'service_id' => $record->service_id,
                     'date' => $value,
                     'hours' => 0,
                     'minutes' => 0,
@@ -78,6 +79,7 @@ class AttendanceController extends Controller
             }
             if($summarizedData[$date]['date']===$date){
                 $summarizedData[$date] = [
+                    'service_id' => $record->service_id,
                     'date' => $value,
                     'hours' => 0,
                     'minutes' => 0,

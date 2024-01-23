@@ -37,7 +37,7 @@ Route::group(['middleware' => 'admin'], function () {
     // Attendance
     Route::get('all/attendance', [AttendanceController::class, 'index']);
     Route::get('live/location/{device_id}/{user_id}', [EmployeeController::class, 'live']);
-    Route::get('playback/index/{service_id}/{user_id}', [EmployeeController::class, 'playbackIndex']);
+    Route::get('playback/index/{service_id}/{user_id}/{to}/{from}', [EmployeeController::class, 'playbackIndex']);
     Route::get('playback/history/{id}/{from}/{to}', [EmployeeController::class, 'playback']);
     // Reports 
     Route::get('reports/attendance', [AttendanceController::class, 'attendanceReport']);
